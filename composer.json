@@ -1,0 +1,40 @@
+{
+    "name": "donkovah/teaket",
+    "description": "Adds ticketing functionalities to your app via APIs",
+    "type": "library",
+    "license": "MIT License",
+    "authors": [
+        {
+            "name": "Oluwasegun Kesington",
+            "email": "iamkesington@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=7",
+        "illuminate/support": "5.5.x|5.6.x|5.7.x|5.8.x",
+        "cviebrock/eloquent-sluggable": "^4.8"
+    },
+    "autoload": {
+        "psr-4": {
+            "Donkovah\\Teaket\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Donkovah\\Teaket\\TeaketServiceProvider"
+            ],
+            "aliases" : {
+                "Teaket": "Donkovah\\Teaket\\Facade"
+            }
+        }
+    },
+    "repositories": [
+        {
+             "type": "composer", 
+             "url": "https://packagist.org"
+        },
+        { "packagist": false }
+    ]
+}
