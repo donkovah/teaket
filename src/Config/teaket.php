@@ -1,12 +1,28 @@
 <?php
 
 return [
+    
+    /**
+     * change to your desired app middleware 
+     */
+    'middleware' => 'web',
+
 
     /**
-     * url prefix
+     * url prefix for web or api routes
      */
     'web' => 'ticket',
     'api' => 'api/ticket',
+
+    /**
+     * route type ['web', 'api']
+     */
+    'route' => 'web',
+
+    /**
+     * select true if your app uses queues
+     */
+    'queue' => false,
 
     /**
      * Name of status each ticket would have
