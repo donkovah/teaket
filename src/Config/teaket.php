@@ -24,6 +24,11 @@ return [
     'queue' => false,
 
     /**
+     * select response between 'json' or 'view'.
+     */
+    'return_response' => 'json',
+
+    /**
      * Name of status each ticket would have
      */
     'status' => [
@@ -43,6 +48,11 @@ return [
         ['id' => 4, 'name' => 'Finance'],
         ['id' => 5, 'name' => 'Others'],
     ],
+
+    /**
+     * category column name in user table.
+     */
+    'category_column' => 'catagory_id',
 
     /**
      * High and Critical priorities would generate a mail to the admin
