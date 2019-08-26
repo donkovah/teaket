@@ -5,14 +5,13 @@ return [
     /**
      * change to your desired app middleware 
      */
-    'middleware' => 'web',
+    'middleware' => 'auth',
 
 
     /**
      * url prefix for web or api routes
      */
-    'web' => 'ticket',
-    'api' => 'api/ticket',
+    'url_prefix' => 'ticket',
 
     /**
      * route type ['web', 'api']
