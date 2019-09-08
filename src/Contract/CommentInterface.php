@@ -1,7 +1,6 @@
 <?php
 namespace Donkovah\Teaket\Contract;
 
-use App\User;
 use Donkovah\Teaket\Model\Teaket;
 use Illuminate\Http\Request;
 use Donkovah\Teaket\Model\Comment;

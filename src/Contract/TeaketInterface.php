@@ -1,7 +1,7 @@
 <?php
 namespace Donkovah\Teaket\Contract;
 
-use App\User;
+use Illuminate\Database\Eloquent\Model;
 use Donkovah\Teaket\Model\Teaket;
 use Illuminate\Http\Request;
 
@@ -10,7 +10,7 @@ interface TeaketInterface {
     /**
      * get all tickets from DB or cloud
     */
-    public function index(User $user);
+    public function index(Model $model);
 
     /**
      * get a ticket from DB or cloud
@@ -40,17 +40,17 @@ interface TeaketInterface {
     /**
      * get closed teakets by this admin
     */
-    public function getAdminClosedTeakets(User $admin);
+    public function getAdminClosedTeakets(Model $admin);
 
     /**
      * get all tickets from DB or cloud
     */
-    public function getAdminOpenTeakets(User $user);
+    public function getAdminOpenTeakets(Model $user);
     
     /**
      * get all tickets from DB or cloud
     */
-    public function getUserClosedTeakets(User $user);
+    public function getUserClosedTeakets(Model $user);
     
     /**
      * Calculate teaket time
