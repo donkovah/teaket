@@ -1,6 +1,6 @@
 {
     "name": "donkovah/teaket",
-    "description": "Adds ticketing functionalities to your app via APIs",
+    "description": "Adds ticketing functionalities to your app",
     "type": "library",
     "license": "MIT License",
     "authors": [

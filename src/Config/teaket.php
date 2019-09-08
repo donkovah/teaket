@@ -13,8 +13,8 @@ return [
      */
     'status' => [
         ['id' => 1, 'name' => 'Pending'], //default for new ticket
-        ['id' => 2, 'name' => 'Bug'],
-        ['id' => 3, 'name' => 'Solved'],
+        ['id' => 2, 'name' => 'Ongoing'],
+        ['id' => 3, 'name' => 'Completed'],
     ],
 
     /**
@@ -38,5 +38,23 @@ return [
         ['id' => 2, 'name' => 'Average'],
         ['id' => 3, 'name' => 'High'],
         ['id' => 4, 'name' => 'Critical'],
-    ]
+    ],
+
+    /**
+     * Listen to ticket events
+     */
+    "emit_event" => true, // change to false if you dont listen to event
+
+    /**
+     * change to false if you do not use queues
+     */
+    "queue" => true, // change to false if you dont listen to event
+
+    /**
+     * how long should your queue wait before fired.
+     */
+    "queue_delay" => 60,
+
+
+
 ];
