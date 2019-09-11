@@ -21,8 +21,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Donkovah\\Teaket\\TeaketServiceProvider",
-                "Donkovah\\Teaket\\EventServiceProvider"
+                "Donkovah\\Teaket\\TeaketServiceProvider"
             ],
             "aliases" : {
                 "Teaket": "Donkovah\\Teaket\\Facade"

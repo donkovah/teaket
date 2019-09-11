@@ -1,8 +1,8 @@
 <?php
 
 //ticket route 
-Route::group(['middleware' => config('teaket.middleware')], function () {
-    Route::prefix(config('teaket.url_prefix'))->group(function(){
+Route::group(['middleware' => ['web', 'auth']], function () {
+    Route::prefix(config('teaket.web'))->group(function(){
 
         Route::get('list', 'Donkovah\Teaket\Controller\TeaketController@index')
         ->name('teaket.index');

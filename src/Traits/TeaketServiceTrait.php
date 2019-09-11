@@ -18,15 +18,33 @@ use Illuminate\Support\Facades\Auth;
 
  trait TeaketServiceTrait
 {
+    public $navActive = [
+        'parent'=>'ticket', 
+        'child'=>'', 
+        'title'=> 'Ticket'
+    ];
    /**
      * get all tickets from DB
     */
-    public function index(Model $user)
+    public function index(User $user)
     {
-        $teakets = Teaket::where('status_id', '!=', 3)
-        ->orderBy('created_at', 'desc')
-        ->get(); //3 reps solved
-        $this->response(['teakets' => $teakets], 'teaket::teaket.list');
+        if (Auth::user()->isHR() || Auth::user()->isHR() || Auth::user()->isAudit() || Auth::user()->isTech()) {
+            $teakets = Teaket::where('status_id', '!=', 3)
+            ->orderBy('created_at', 'desc')
+            ->get(); //3 reps solved
+        } else {
+            $teakets = Teaket::where('status_id', '!=', 3)
+            ->whereIn('user_id', Auth::user()->organization->users->pluck('id'))
+            ->orderBy('created_at', 'desc')
+            ->get(); //3 reps solved
+        }
+        if (request()->ajax() || starts_with(request()->path(), 'api')) {
+            return response()->json([
+                'teakets' => $teakets
+            ]);
+        }
+        $navActive = $this->navActive;
+        return view('teaket::teaket.list', compact('teakets', 'navActive'));
     }
    /**
      * only needed if you make use of view
@@ -37,15 +55,17 @@ use Illuminate\Support\Facades\Auth;
         $status = config('teaket.status');
         $category = config('teaket.category');
         $priority = config('teaket.priority');
-        $this->response(
-            [
+        if (request()->ajax() || starts_with(request()->path(), 'api')) {
+            return response()->json([
                 'teaket' => $teaket,
                 'status' => $status,
                 'category' => $category,
                 'priority' => priority,
-            ],
-            'teaket::teaket.list'
-        );
+            ]);
+        }
+        $navActive = $this->navActive;
+        return view('teaket::teaket.create', 
+        compact('teaket', 'status', 'category', 'priority', 'navActive'));
     }
     /**
      * get admin for a category
@@ -54,14 +74,33 @@ use Illuminate\Support\Facades\Auth;
      */
     public function getAdminCategory($category)
     {
-        foreach (config('teaket.category') as $key => $value) {
-            if($value['id'] == $category){
-                $admin = User::where(config('teaket.category_column'), '=', $category)
-                ->get();
-                $this->response(['admin' => $admin]);
-            }
-            $this->response(['admin' => null]);
+        switch ($category) {
+            case 1:
+                # Hr
+                $admin = User::where('department_id', '=', 1)->get();
+                break;
+            case 2:
+                # Tech
+                $admin = User::where('department_id', '=', 3)->get();
+                break;       
+            case 3:
+                # Audit
+                $admin = User::where('department_id', '=', 6)->get();
+                break;           
+            case 4:
+                # Finance
+                $admin = User::where('department_id', '=', 2)->get();
+                break;            
+            default:
+                return response()->json([
+                    'admin' => null,
+                ]);
+                break;
         }
+        return response()->json([
+            'admin' => $admin
+        ]);
+
     }
 
     /**
@@ -258,23 +297,6 @@ use Illuminate\Support\Facades\Auth;
             'topic' => 'Success']
         );    
         return back();
-    }
-
-    protected function response($variable, $view = null)
-    {
-        switch (config('teaket.return_response')) {
-            case 'json':
-                return response()->json($variable);
-                break;
-
-            case 'web':
-                return view($view)->with($variable);
-                break;
-            
-            default:
-                abort(500, 'Cannot handle response');
-                break;
-        }
     }
 
 }
