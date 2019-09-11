@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Auth;
    /**
      * get all tickets from DB
     */
-    public function index(User $user)
+    public function index(Model $user)
     {
         $teakets = Teaket::where('status_id', '!=', 3)
         ->orderBy('created_at', 'desc')
