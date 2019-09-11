@@ -2,7 +2,7 @@
     "name": "donkovah/teaket",
     "description": "Adds ticketing functionalities to your app",
     "type": "library",
-    "license": "MIT License",
+    "license": "MIT",
     "authors": [
         {
             "name": "Oluwasegun Kesington",
