@@ -6,6 +6,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Donkovah\Teaket\Model\Teaket;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\Model;
 
 /**
  * This trait assumes you make use of Laravel's 
